@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>แบบฟอร์มขอเปิดบัญชีธนาคาร</title>
+  <style>
+    body { font-family: 'Kanit', sans-serif; padding: 40px; background: #f1f1f1; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+    h1 { text-align: center; color: #2e7d32; }
+    input, button { width: 100%; padding: 12px; margin: 10px 0; font-size: 16px; }
+    .form-text { background: #e8f5e9; padding: 15px; border-radius: 8px; margin-top: 20px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>แบบฟอร์มขอเปิดบัญชีธนาคาร</h1>
+
+    <input type="text" placeholder="ชื่อ-นามสกุล">
+    <input type="text" placeholder="เบอร์โทรศัพท์">
+    <input type="email" placeholder="อีเมล">
+
+    <button onclick="downloadForm()">ดาวน์โหลดไฟล์ต้นฉบับ</button>
+    <button onclick="copyForm()">คัดลอกข้อความแบบฟอร์ม</button>
+
+    <div class="form-text" id="formText">
+      แบบฟอร์มเปิดบัญชี
+      ----------------------
+      ชื่อ-นามสกุล:
+      เบอร์โทร:
+      อีเมล:
+      เอกสารประกอบ: บัตรประชาชน, ทะเบียนบ้าน
+    </div>
+  </div>
+
+  <script>
+    function copyForm() {
+      const text = document.getElementById('formText').innerText;
+      navigator.clipboard.writeText(text).then(() => alert('คัดลอกข้อความแล้ว!'));
+    }
+    function downloadForm() {
+      const text = document.getElementById('formText').innerText;
+      const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'bank_form.txt';
+      link.click();
+    }
+  </script>
+</body>
+</html>
